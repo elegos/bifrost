@@ -13,7 +13,7 @@ import {
 import { EmbedColors } from './utils/embeds';
 import logger from './utils/logging/logger';
 import FluxerCommandHandler from './commands/fluxer/FluxerCommandHandler';
-import { COMMAND_PREFIX, DELETE_INVOCATION, FLUXER_TOKEN } from './utils/env';
+import { COMMAND_PREFIX, DELETE_INVOCATION, FLUXER_BASE_URL, FLUXER_TOKEN } from './utils/env';
 import { LinkService } from './services/LinkService';
 import LinkFluxerCommandHandler from './commands/fluxer/handlers/LinkFluxerCommandHandler';
 import UnlinkFluxerCommandHandler from './commands/fluxer/handlers/UnlinkFluxerCommandHandler';
@@ -65,6 +65,7 @@ const startFluxerClient = async ({
                 text: 'Bridging to Discord',
             },
         },
+        ...(FLUXER_BASE_URL ? { rest: { api: FLUXER_BASE_URL } } : {}),
     });
 
     webhookService.setFluxerClient(client);

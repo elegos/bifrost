@@ -55,6 +55,8 @@ export const DISCORD_TOKEN = process.env.BF_DISCORD_TOKEN || '';
 export const FLUXER_APP_ID = process.env.BF_FLUXER_APP_ID || '';
 export const DISCORD_APP_ID = process.env.BF_DISCORD_APP_ID || '';
 
+export const FLUXER_BASE_URL = process.env.BF_FLUXER_BASE_URL || null;
+
 export const DISCORD_HEALTH_URL = process.env.BF_DISCORD_HEALTH_URL || null;
 export const FLUXER_HEALTH_URL = process.env.BF_FLUXER_HEALTH_URL || null;
 
