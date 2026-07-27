@@ -20,6 +20,7 @@ import {
     DISCORD_APP_ID,
     DISCORD_HEALTH_URL,
     FLUXER_APP_ID,
+    FLUXER_BASE_URL,
     FLUXER_HEALTH_URL,
     GIT_COMMIT,
     METRICS_PORT,
@@ -179,7 +180,8 @@ const main = async () => {
     logger.info(`Discord Bot Invite Link: ${discordBotInviteLink}`);
     const fluxerBotInviteLink = generateFluxerBotInviteLink(
         FLUXER_APP_ID,
-        perms
+        perms,
+        FLUXER_BASE_URL ? new URL(FLUXER_BASE_URL).origin : undefined
     );
     logger.info(`Fluxer Bot Invite Link: ${fluxerBotInviteLink}`);
 

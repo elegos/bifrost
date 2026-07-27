@@ -7,7 +7,8 @@ export const generateDiscordBotInviteLink = (
 
 export const generateFluxerBotInviteLink = (
     clientId: string,
-    permissions: string
+    permissions: string,
+    baseUrl = 'https://web.fluxer.app'
 ) => {
-    return `https://web.fluxer.app/oauth2/authorize?client_id=${clientId}&scope=bot&permissions=${permissions}`;
+    return `${baseUrl}/oauth2/authorize?client_id=${clientId}&scope=bot&permissions=${permissions}`;
 };
