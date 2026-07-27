@@ -64,7 +64,7 @@ export default class DiscordToFluxerMessageRelay extends MessageRelay<
             msg = {
                 content: formatJoinMessage(message.author.username, 'discord'),
                 username: message.client.user?.username || 'Bifröst',
-                avatarURL: message.client.user?.avatarURL() || '',
+                avatarURL: message.client.user?.displayAvatarURL() || '',
             };
         } else {
             const fluxerEmojis = await this.fluxerEntityResolver.fetchEmojis(

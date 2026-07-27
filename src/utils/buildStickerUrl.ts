@@ -1,9 +1,11 @@
+import { FLUXER_CDN_URL } from './env';
+
 export const buildFluxerStickerUrl = (
     id: string,
     animated: boolean,
     size?: number
 ) => {
-    const url = `https://fluxerusercontent.com/stickers/${id}?size=${size || 320}&animated=${animated}`;
+    const url = `${FLUXER_CDN_URL}/stickers/${id}?size=${size || 320}&animated=${animated}`;
     return url;
 };
 

@@ -117,8 +117,7 @@ export default class DiscordMessageTransformer extends MessageTransformer<
                                 referencedMessage.author.username +
                                 ` ${refrenceEmoji}`,
                             iconURL:
-                                referencedMessage.author.avatarURL() ||
-                                undefined,
+                                referencedMessage.author.displayAvatarURL(),
                         },
                     })
                 );
@@ -128,7 +127,7 @@ export default class DiscordMessageTransformer extends MessageTransformer<
         return {
             content: messageContent,
             username: message.author.username,
-            avatarURL: message.author.avatarURL() || '',
+            avatarURL: message.author.displayAvatarURL(),
             attachments: attachments,
             embeds,
         };

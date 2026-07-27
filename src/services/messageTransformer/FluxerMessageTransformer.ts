@@ -3,6 +3,7 @@ import MessageTransformer from './MessageTransformer';
 import { WebhookMessageData } from '../WebhookService';
 import { breakMentions, sanitizeMentions } from '../../utils/sanitizeMentions';
 import { buildFluxerStickerUrl } from '../../utils/buildStickerUrl';
+import { buildFluxerAvatarUrl } from '../../utils/buildAvatarUrl';
 import WebhookEmbed from '../WebhookEmbed';
 import { GeneralEmoji } from '../../utils/emojis';
 
@@ -82,9 +83,10 @@ export default class FluxerMessageTransformer extends MessageTransformer<
                     color: 0x252529,
                     author: {
                         name: message.referencedMessage.author.username + ' ↩️',
-                        iconURL:
-                            message.referencedMessage.author.avatarURL() ||
-                            undefined,
+                        iconURL: buildFluxerAvatarUrl(
+                            message.referencedMessage.author.id,
+                            message.referencedMessage.author.avatar
+                        ),
                     },
                     timestamp: null,
                 })
@@ -94,7 +96,10 @@ export default class FluxerMessageTransformer extends MessageTransformer<
         return {
             content: emojiReplacedContent,
             username: message.author.username,
-            avatarURL: message.author.avatarURL() || '',
+            avatarURL: buildFluxerAvatarUrl(
+                message.author.id,
+                message.author.avatar
+            ),
             attachments: attachments,
             embeds,
         };

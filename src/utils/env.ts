@@ -57,6 +57,21 @@ export const DISCORD_APP_ID = process.env.BF_DISCORD_APP_ID || '';
 
 export const FLUXER_BASE_URL = process.env.BF_FLUXER_BASE_URL || null;
 
+// @fluxerjs/core hardcodes its CDN hosts to the official fluxerusercontent.com /
+// fluxerstatic.com. Self-hosted instances serve this content from their own
+// domain instead: user-generated content (avatars, stickers, attachments) is
+// proxied under /media by the media-proxy service, while built-in static
+// assets (default avatar images, emoji, etc.) are served at the domain root
+// by the static-proxy service. Derive both from BF_FLUXER_BASE_URL when set,
+// falling back to the official CDN hosts otherwise.
+const FLUXER_ORIGIN = FLUXER_BASE_URL
+    ? FLUXER_BASE_URL.replace(/\/api\/?$/, '')
+    : null;
+export const FLUXER_CDN_URL = FLUXER_ORIGIN
+    ? `${FLUXER_ORIGIN}/media`
+    : 'https://fluxerusercontent.com';
+export const FLUXER_STATIC_CDN_URL = FLUXER_ORIGIN || 'https://fluxerstatic.com';
+
 export const DISCORD_HEALTH_URL = process.env.BF_DISCORD_HEALTH_URL || null;
 export const FLUXER_HEALTH_URL = process.env.BF_FLUXER_HEALTH_URL || null;
 

@@ -2,6 +2,7 @@ import { Message } from '@fluxerjs/core';
 import MessageRelay from './MessageRelay';
 import logger from '../../utils/logging/logger';
 import { formatJoinMessage } from '../../utils/formatJoinMessage';
+import { buildFluxerAvatarUrl } from '../../utils/buildAvatarUrl';
 import MessageQueueService, { toSerializable } from '../MessageQueueService';
 import { WebhookMessageData, WebhookService } from '../WebhookService';
 import DiscordEntityResolver from '../entityResolver/DiscordEntityResolver';
@@ -61,7 +62,12 @@ export default class FluxerToDiscordMessageRelay extends MessageRelay<Message> {
                     'fluxer'
                 ),
                 username: message.client.user?.username || 'Bifröst',
-                avatarURL: message.client.user?.avatarURL() || '',
+                avatarURL: message.client.user
+                    ? buildFluxerAvatarUrl(
+                          message.client.user.id,
+                          message.client.user.avatar
+                      )
+                    : '',
             };
         } else {
             const discordEmojis = await this.discordEntityResolver.fetchEmojis(
